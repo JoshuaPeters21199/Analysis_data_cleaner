@@ -1,14 +1,16 @@
 import sys
 import pandas as pd 
+import re
+import csv
 
-excel_file = sys.argv[1]
+csv_file = sys.argv[1]
 
-def open_data():
-    dataframe = pd.read_excel(excel_file)
+def read_and_store_data():
+    dataframe = pd.read_excel(csv_file)
     print(dataframe)
 
 def main():
-    open_data()
+    read_and_store_data()
 
 if __name__ == "__main__":
     main()
