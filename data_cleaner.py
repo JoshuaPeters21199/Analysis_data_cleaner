@@ -4,20 +4,41 @@ import re
 import csv
 
 csv_file = sys.argv[1]
+all_rows = []
 
 '''
 Titles/Headers for shipping cost:
 Label Cost, Shipping Cost
 '''
 
-def read_and_store_data():
+def extract_headers():
+    row_count = 0
     with open(csv_file) as f:
         csv_reader = csv.reader(f, delimiter=',')
         for row in csv_reader:
-            pass
+            if row_count == 0:
+                return row
+
+def verify_headers():
+    headers = extract_headers()
+    for header in headers:
+        print(f'{header}')
+    cost_input = input("Which column contains the correct shipping cost?")
+
+def read_and_store_data():
+    row_count = 0
+    with open(csv_file) as f:
+        csv_reader = csv.reader(f, delimiter=',')
+        for row in csv_reader:
+            if row_count == 0:
+                file_headers = row
+            else:
+                all_rows.append(row)
+            row_count += 1
 
 def main():
     read_and_store_data()
+    verify_headers()
 
 if __name__ == "__main__":
     main()
